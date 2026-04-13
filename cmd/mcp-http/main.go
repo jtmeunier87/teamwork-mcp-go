@@ -356,13 +356,6 @@ func authMiddleware(resources config.Resources, next http.Handler) http.Handler 
 	}
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Self-hosted: if TW_MCP_BEARER_TOKEN is set and no Authorization header
-		// is provided, inject it automatically so the server works without OAuth.
-		if resources.Info.BearerToken != "" && r.Header.Get("Authorization") == "" {
-			r = r.Clone(r.Context())
-			r.Header.Set("Authorization", "Bearer "+resources.Info.BearerToken)
-		}
-
 		requestLogger := resources.Logger().With(
 			slog.String("method", r.Method),
 			slog.String("path", r.URL.Path),
