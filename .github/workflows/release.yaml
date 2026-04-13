@@ -60,8 +60,11 @@ jobs:
           version: latest
           endpoint: builders
 
-      - name: Image Release
+      - name: Image Release (stdio — self-hosted entrypoint)
         run: make push-stdio VERSION=${{ steps.resolve.outputs.version }}
+
+      - name: Image Release (http — multi-tenant entrypoint)
+        run: make push VERSION=${{ steps.resolve.outputs.version }}
 
   build-binaries:
     runs-on: ubuntu-latest

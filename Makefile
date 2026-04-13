@@ -11,6 +11,8 @@ LATEST_TAG          = ghcr.io/jtmeunier87/teamwork-mcp-go:latest
 LATEST_INTERNAL_TAG = ghcr.io/jtmeunier87/teamwork-mcp-go:$(subst /,,${EFFECTIVE_BRANCH})-latest
 TAG                 = ghcr.io/jtmeunier87/teamwork-mcp-go:$(VERSION)
 INTERNAL_TAG        = ghcr.io/jtmeunier87/teamwork-mcp-go:$(VERSION)
+STDIO_TAG           = ghcr.io/jtmeunier87/teamwork-mcp-go:$(VERSION)-stdio
+STDIO_LATEST_TAG    = ghcr.io/jtmeunier87/teamwork-mcp-go:latest-stdio
 
 .PHONY: build build-stdio push push-stdio install
 
@@ -54,10 +56,11 @@ push-stdio:
 	  --build-arg BUILD_DATE=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ') \
 	  --build-arg BUILD_VCS_REF=$(VCS_REF) \
 	  --build-arg BUILD_VERSION=$(VERSION) \
-	  -t $(TAG) \
-	  -t $(LATEST_TAG) \
+	  -t $(STDIO_TAG) \
+	  -t $(STDIO_LATEST_TAG) \
 	  --push \
 	  --progress=plain \
+	  --target stdio \
 	  .
 
 install:

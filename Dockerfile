@@ -74,4 +74,13 @@ ENTRYPOINT [ "/bin/tw-mcp-http" ]
 #                    ░                   
 FROM runner AS stdio
 
+# Install Node.js + supergateway so this image can be used self-hosted
+# behind a streamable-HTTP transport without a separate sidecar.
+USER root
+RUN apk add --no-cache nodejs npm && \
+    npm install -g supergateway && \
+    apk del npm
+USER mcp
+
+# Default: run stdio binary directly (can be overridden in compose)
 ENTRYPOINT [ "/bin/tw-mcp-stdio" ]
