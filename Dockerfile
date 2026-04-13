@@ -78,8 +78,7 @@ FROM runner AS stdio
 # behind a streamable-HTTP transport without a separate sidecar.
 USER root
 RUN apk add --no-cache nodejs npm && \
-    npm install -g supergateway && \
-    apk del npm
+    npm install -g supergateway
 USER mcp
 
 # Default: run stdio binary directly (can be overridden in compose)
