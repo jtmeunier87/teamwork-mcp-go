@@ -7,10 +7,10 @@ VCS_REF             = $(shell git rev-parse --short HEAD)
 VERSION             = v$(shell git describe --always --match "v*" | sed 's/^v//')
 BRANCH              = $(shell git rev-parse --abbrev-ref HEAD)
 EFFECTIVE_BRANCH    = $(call get_effective_branch,$(BRANCH))
-LATEST_TAG          = ghcr.io/teamwork/mcp:latest
-LATEST_INTERNAL_TAG = 343218184206.dkr.ecr.us-east-1.amazonaws.com/teamwork/mcp:$(subst /,,${EFFECTIVE_BRANCH})-latest
-TAG                 = ghcr.io/teamwork/mcp:$(VERSION)
-INTERNAL_TAG        = 343218184206.dkr.ecr.us-east-1.amazonaws.com/teamwork/mcp:$(VERSION)
+LATEST_TAG          = ghcr.io/jtmeunier87/teamwork-mcp-go:latest
+LATEST_INTERNAL_TAG = ghcr.io/jtmeunier87/teamwork-mcp-go:$(subst /,,${EFFECTIVE_BRANCH})-latest
+TAG                 = ghcr.io/jtmeunier87/teamwork-mcp-go:$(VERSION)
+INTERNAL_TAG        = ghcr.io/jtmeunier87/teamwork-mcp-go:$(VERSION)
 
 .PHONY: build build-stdio push push-stdio install
 
